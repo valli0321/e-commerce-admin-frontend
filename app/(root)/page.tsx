@@ -1,0 +1,21 @@
+'use client';
+
+import { useStoreModal } from "@/hooks/use-store-modal";
+import { onOpen } from "@/redux/slices/storeModalSlice";
+import { useEffect } from "react";
+
+export default function Home() {
+
+  const storeModal = useStoreModal();
+
+  useEffect(() => {
+    if(!storeModal.isOpen)
+      storeModal.onOpen();
+  }, [storeModal.isOpen, storeModal.onOpen]);
+
+  return (
+    <>
+      Root Page
+    </>
+  );
+}
