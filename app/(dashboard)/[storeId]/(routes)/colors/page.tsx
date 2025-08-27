@@ -2,7 +2,7 @@ import React from 'react'
 import { format } from "date-fns";
 
 import { serverGet } from '@/lib/serverApiUtils'
-import { Color } from '@/types/store'
+import { Color } from '@/types/types'
 import { ColorsClient } from './components/client'
 import { ColorColumn } from './components/columns'
 

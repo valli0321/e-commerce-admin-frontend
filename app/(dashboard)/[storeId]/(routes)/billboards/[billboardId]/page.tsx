@@ -1,7 +1,7 @@
 import React from 'react'
 import BillboardForm from './components/billboard-form'
 import { serverGet } from '@/lib/serverApiUtils'
-import { Billboard } from '@/types/store'
+import { Billboard } from '@/types/types'
 
 const BillboardPage = async ({
     params

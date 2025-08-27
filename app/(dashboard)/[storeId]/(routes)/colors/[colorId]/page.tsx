@@ -1,7 +1,7 @@
 import React from 'react'
 import ColorForm from './components/color-form'
 import { serverGet } from '@/lib/serverApiUtils'
-import { Color } from '@/types/store'
+import { Color } from '@/types/types'
 
 const ColorPage = async ({
     params

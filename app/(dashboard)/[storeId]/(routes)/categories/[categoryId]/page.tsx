@@ -1,7 +1,7 @@
 import React from 'react'
 import CategoryForm from './components/category-form'
 import { serverGet } from '@/lib/serverApiUtils'
-import { Billboard, Category } from '@/types/store'
+import { Billboard, Category } from '@/types/types'
 
 const CategoryPage = async ({
     params
@@ -16,7 +16,7 @@ const CategoryPage = async ({
     billboards = res?.data;
 
     try {
-        const { data }  = await serverGet<{ data: Category }>(`/categoryById/${categoryId}`);
+        const { data } = await serverGet<{data: Category}>(`/categoryById/${categoryId}`);
         categoryData = data;
     } catch (error) {
         console.log("Error fetching :", error)
