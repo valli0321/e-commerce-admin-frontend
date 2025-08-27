@@ -3,7 +3,7 @@ import React from 'react'
 import { MainNav } from './main-nav'
 import StoreSwitcher from './store-switcher'
 import { serverGet, verifySession } from '@/lib/serverApiUtils'
-import { Store } from '@/types/store' 
+import { Store } from '@/types/types' 
 import { UserButton } from './user-button'
 
 export const Navbar = async () => {
