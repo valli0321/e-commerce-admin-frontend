@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image';
 import { ImagePlus, Trash } from 'lucide-react';
 import { CldUploadWidget } from "next-cloudinary";
@@ -9,9 +9,9 @@ import { Button } from '@/components/ui/button';
 
 interface ImageUploadProps {
   disabled?: boolean;
-  onChange: (value: string) => void; 
-  onRemove: (value: string) => void; 
-  value: string[];
+  onChange: (value: { url: string }[]) => void
+  onRemove: (url: string) => void
+  value: { url: string }[];
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
@@ -21,28 +21,42 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   value
 }) => {
   const [isMounted, setIsMounted] = useState(false);
+  const currentImagesRef = useRef(value);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  useEffect(() => {
+    currentImagesRef.current = value
+  }, [value])
 
   const onUpload = (result: any) => {
-    onChange(result?.info.secure_url);
+    const newImage = { url: result?.info.secure_url };
+    const updatedImages = [...currentImagesRef.current, newImage];
+
+    currentImagesRef.current = updatedImages;
+
+    onChange(updatedImages)
+  }
+
+  const handleRemove = (urlToRemove: string) => {
+    const filteredImages = value.filter((image) => image.url !== urlToRemove)
+    onChange(filteredImages)
+    onRemove(urlToRemove)
   }
 
   if(!isMounted){
     return null;
   }
 
-
   return (
       <div>
-        <div className='mb-4 flex-col items-center gap-4'>
-          {value.map((url) => (
-            <div key={url} className='relative w-[200px] h-[200px] rounded-md overflow-hidden mb-2'>
+        <div className='mb-4 flex items-center gap-4'>
+          {value.map((image) => (
+            <div key={image.url} className='relative w-[200px] h-[200px] rounded-md overflow-hidden mb-2'>
               <div className='z-10 absolute top-2 right-2'>
-                <Button type='button' onClick={() => onRemove(url)} variant="destructive" size="icon" >
+                <Button type='button' onClick={() => handleRemove(image.url)} variant="destructive" size="icon" >
                   <Trash className='h-4 w-4' />
                 </Button>
               </div>
@@ -50,10 +64,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                 fill
                 className='object-cover'
                 alt="Image"
-                src={url}
+                src={image.url}
               />
             </div>
           ))}
+          </div>
           <CldUploadWidget 
             onSuccess={(result, { widget }) => {
               onUpload(result);
@@ -77,7 +92,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               )
             }}
           </CldUploadWidget>
-        </div>
       </div>
     )
 }
