@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-hot-toast';
 import { useRouter, useParams } from 'next/navigation';
 
-import { Size } from '@/types/store';
+import { Size } from '@/types/types';
 import { Heading } from '@/components/ui/heading';
 import { Button } from '@/components/ui/button';
 import { Trash } from 'lucide-react';

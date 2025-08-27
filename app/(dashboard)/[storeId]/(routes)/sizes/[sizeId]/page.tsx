@@ -1,7 +1,7 @@
 import React from 'react'
 import SizeForm from './components/size-form'
 import { serverGet } from '@/lib/serverApiUtils'
-import { Size } from '@/types/store'
+import { Size } from '@/types/types'
 
 const SizePage = async ({
     params
