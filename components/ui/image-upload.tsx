@@ -18,7 +18,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   disabled,
   onChange,
   onRemove,
-  value
+  value=[]
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const currentImagesRef = useRef(value);
