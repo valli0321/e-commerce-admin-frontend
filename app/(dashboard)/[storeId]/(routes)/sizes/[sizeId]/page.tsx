@@ -6,13 +6,13 @@ import { Size } from '@/types/types'
 const SizePage = async ({
     params
 }: {
-    params: { sizeId: string }
+    params: { sizeId: string, storeId: string }
 }) => {
-    const { sizeId } = await params;
+    const { sizeId, storeId } = await params;
     let sizeData: Size | null = null;
 
     try {
-        const { data }  = await serverGet<{ data: Size }>(`/sizeById/${sizeId}`)
+        const { data }  = await serverGet<{ data: Size }>(`${storeId}/sizes/${sizeId}`)
         sizeData = data;
     } catch (error) {
         console.log("Error fetching ", error)

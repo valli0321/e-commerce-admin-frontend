@@ -150,11 +150,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                                         value={field.value}
                                         // value={field.value.map((image) => image.url)}
                                         disabled={loading}
-                                        onChange={(images) => {
-                                            console.log("Form field onChange called with:", images)
-                                            field.onChange(images)
-                                        }}
-                                        // onRemove={(url) => field.onChange([...field.value.filter((current) => current.url !== url)])}
+                                        onChange={(images) => field.onChange(images)}
                                         onRemove={(url) => {
                                             const filteredImages = field.value.filter((image) => image.url !== url)
                                             field.onChange(filteredImages)

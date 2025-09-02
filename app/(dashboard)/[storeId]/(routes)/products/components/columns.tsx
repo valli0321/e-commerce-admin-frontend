@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 
 import { CellAction } from "./cell-actions"
+import { Badge } from "@/components/ui/badge";
 
 export type ProductColumn = {
   id: string;
@@ -24,10 +25,20 @@ export const columns: ColumnDef<ProductColumn>[] = [
   {
     accessorKey: "isArchived",
     header: "Archived",
+    cell: ({ row }) => (
+      <Badge variant={row.original.isArchived ? "destructive" : "primary"}>
+        {row.original.isArchived ? "Archived" : "Active"}
+      </Badge>
+    )
   },
   {
     accessorKey: "isFeatured",
     header: "Featured",
+    cell: ({ row }) => (
+      <Badge variant={row.original.isFeatured ? "success" : "secondary"}>
+        {row.original.isFeatured ? "Featured" : "Not Featured"}
+      </Badge>
+    )
   },
   {
     accessorKey: "price",
