@@ -23,7 +23,7 @@ const ProductPage = async ({
 
 
     try {
-        const { data }  = await serverGet<{ data: Product }>(`/productById/${productId}`)
+        const { data }  = await serverGet<{ data: Product }>(`${storeId}/products/${productId}`)
         productData = data;
     } catch (error) {
         console.log("Error fetching Product:", error)

@@ -16,7 +16,7 @@ const CategoryPage = async ({
     billboards = res?.data;
 
     try {
-        const { data } = await serverGet<{data: Category}>(`/categoryById/${categoryId}`);
+        const { data } = await serverGet<{data: Category}>(`/${storeId}/categories/${categoryId}`);
         categoryData = data;
     } catch (error) {
         console.log("Error fetching :", error)

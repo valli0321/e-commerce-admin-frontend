@@ -17,10 +17,10 @@ const CategoriesPage = async ({
   const { data } = await serverGet<{data: Category[]}>(`${storeId}/categories`);
 
   const formattedCategories: CategoryColumn[] = data.map((item)=> ({
-    id: item.id,
-    name: item.name,
-    billboardLabel: item.billboard.label,
-    createdAt: format(item.createdAt, "MMMM do, yyyy")
+    id: item?.id,
+    name: item?.name,
+    billboardLabel: item?.billboard?.label,
+    createdAt: format(item?.createdAt, "MMMM do, yyyy")
   }))
   
   return (

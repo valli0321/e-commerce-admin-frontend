@@ -6,13 +6,13 @@ import { Color } from '@/types/types'
 const ColorPage = async ({
     params
 }: {
-    params: { colorId: string }
+    params: { colorId: string, storeId: string }
 }) => {
-    const { colorId } = await params;
+    const { colorId , storeId} = await params;
     let colorData: Color | null = null;
 
     try {
-        const { data }  = await serverGet<{ data: Color }>(`/colorById/${colorId}`)
+        const { data }  = await serverGet<{ data: Color }>(`${storeId}/colors/${colorId}`)
         colorData = data;
     } catch (error) {
         console.log("Error fetching ", error)

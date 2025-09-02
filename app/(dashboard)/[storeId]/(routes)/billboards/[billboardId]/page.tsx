@@ -6,13 +6,13 @@ import { Billboard } from '@/types/types'
 const BillboardPage = async ({
     params
 }: {
-    params: { billboardId: string }
+    params: { storeId: string, billboardId: string }
 }) => {
-    const { billboardId } = await params;
+    const { storeId, billboardId } = await params;
     let billboardData: Billboard | null = null;
 
     try {
-        const { data }  = await serverGet<{ data: Billboard }>(`/billboardById/${billboardId}`)
+        const { data }  = await serverGet<{ data: Billboard }>(`${storeId}/billboards/${billboardId}`)
         billboardData = data;
     } catch (error) {
         console.log("Error fetching billboard:", error)
