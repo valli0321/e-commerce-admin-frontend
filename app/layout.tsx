@@ -6,6 +6,7 @@ import { ReduxProvider, AuthInitializer } from "@/providers/redux-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
 
 import "./globals.css";
+import { ThemeProvider } from "@/providers/theme-providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,13 +33,15 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
-            <ReduxProvider>
-              <AuthInitializer>
-                <ToasterProvider/>
-                <ModalProvider/>
-                {children}
-              </AuthInitializer>
-            </ReduxProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <ReduxProvider>
+                <AuthInitializer>
+                  <ToasterProvider/>
+                  <ModalProvider/>
+                  {children}
+                </AuthInitializer>
+              </ReduxProvider>
+            </ThemeProvider>
         </body>
       </html>
   );
