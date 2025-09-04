@@ -1,7 +1,6 @@
 'use client';
 
 import { useStoreModal } from "@/hooks/use-store-modal";
-import { onOpen } from "@/redux/slices/storeModalSlice";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -14,8 +13,6 @@ export default function Home() {
   }, [storeModal.isOpen, storeModal.onOpen]);
 
   return (
-    <>
-      Root Page
-    </>
+    null
   );
 }

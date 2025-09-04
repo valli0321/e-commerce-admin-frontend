@@ -1,14 +1,12 @@
 'use client'
 
-import { useDispatch, useSelector } from "react-redux";
-
 import { onClose, onOpen } from "@/redux/slices/storeModalSlice";
-import { AppDispatch, RootState } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 
 export const useStoreModal = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const isOpen = useSelector((state: RootState) => state.storeModal.isOpen);
+    const dispatch = useAppDispatch();
+    const isOpen = useAppSelector((state) => state.storeModal.isOpen);
 
     return {
         isOpen,
