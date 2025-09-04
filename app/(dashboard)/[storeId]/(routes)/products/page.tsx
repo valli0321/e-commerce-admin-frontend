@@ -18,13 +18,13 @@ const ProductsPage = async ({
 
   const { data } = await serverGet<{data: Product[]}>(`${storeId}/products`);
 
-  const formattedProducts: ProductColumn[] = data.map((item)=> ({
+  const formattedProducts: ProductColumn[] = data?.map((item)=> ({
     id: item?.id,
     name: item?.name,
     isArchived: item?.isArchived,
     isFeatured: item?.isFeatured,
-    price: formatter.format(item.price),
-    category: item?.category.name,
+    price: formatter.format(item?.price),
+    category: item?.category?.name,
     size: item?.size?.name,
     color: item?.color?.value,
     createdAt: format(item?.createdAt, "MMMM do, yyyy")
