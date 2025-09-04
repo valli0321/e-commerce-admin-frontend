@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 
 import { ModalProvider } from "@/providers/modal-provider";
+import { ReduxProvider, AuthInitializer } from "@/providers/redux-provider";
+import { ToasterProvider } from "@/providers/toast-provider";
 
 import "./globals.css";
-
-import { ReduxProvider } from "@/providers/redux-provider";
+import { ThemeProvider } from "@/providers/theme-providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,17 +29,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
-            <ReduxProvider>
-              <ModalProvider/>
-              {children}
-            </ReduxProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <ReduxProvider>
+                <AuthInitializer>
+                  <ToasterProvider/>
+                  <ModalProvider/>
+                  {children}
+                </AuthInitializer>
+              </ReduxProvider>
+            </ThemeProvider>
         </body>
       </html>
-    </ClerkProvider>
   );
 }
